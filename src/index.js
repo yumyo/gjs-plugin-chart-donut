@@ -5,14 +5,14 @@ import {
   hChartDonutRef
 } from './consts';
 
-export default grapesjs.plugins.add('gjs-zing-donut', (editor, opts = {}) => {
+export default grapesjs.plugins.add('gjs-chart-donut', (editor, opts = {}) => {
   let c = opts;
 
   let defaults = {
     blocks: [hChartDonutRef],
     defaultStyle: 1,
     chartDonutClsPfx: 'chart-donut',
-    labelChartDonut: 'ChartDonut',
+    labelChartDonut: 'Donut Chart',
     labelChartDonutBlock: 'Chart Donut',
     labelChartDonutCategory: 'Charts',
   };
