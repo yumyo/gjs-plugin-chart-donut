@@ -1,6 +1,6 @@
 # GrapesJS Chart Donut
 
-Simple donut chart component for GrapesJS editor, powered by [ZingChart](https://www.zingchart.com/).
+Simple donut chart component for GrapesJS editor, powered by [ZingChart](https://www.zingchart.com/). Started as a fork of the GrapesJs Navbar plugin [https://github.com/artf/grapesjs-navbar](https://github.com/artf/grapesjs-navbar)
 
 # [Demo](http://grapesjs.com/demo.html)
 
@@ -45,8 +45,8 @@ Simple donut chart component for GrapesJS editor, powered by [ZingChart](https:/
 Clone the repository
 
 ```sh
-$ git clone https://github.com/artf/grapesjs-navbar.git
-$ cd grapesjs-navbar
+$ git clone https://github.com/yumyo/grapesjs-plugin-chart-donut.git
+$ cd grapesjs-plugin-chart-donut
 ```
 
 Install it
