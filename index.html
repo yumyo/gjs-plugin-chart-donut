@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>GrapesJS Navbar Plugin</title>
+        <link
+            href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/grapesjs"></script>
+        <script src="dist/grapesjs-zing-donut.min.js"></script>
+        <script src="https://unpkg.com/grapesjs-blocks-bootstrap4@0.1.16/dist/grapesjs-blocks-bootstrap4.min.js"></script>
+        <style>
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gjs" style="height:0px; overflow:hidden"></div>
+        <script type="text/javascript">
+            var editor = grapesjs.init({
+                height: '100%',
+                noticeOnUnload: 0,
+                storageManager: { autoload: 0 },
+                container: '#gjs',
+                fromElement: true,
+                allowScripts: 1,
+                plugins: ['gjs-zing-donut', 'grapesjs-blocks-bootstrap4'],
+                pluginsOpts: {
+                    'gjs-zing-donut': {},
+                    'grapesjs-blocks-bootstrap4': {
+                        blocks: {
+                            form: false,
+                            button: false,
+                            button_group: false,
+                            button_toolbar: false,
+                            input: false,
+                            input_group: false,
+                            form_group_input: false,
+                            textarea: false,
+                            checkbox: false,
+                            radio: false,
+                            select: false,
+                            label: false,
+                        },
+                        blockCategories: {
+                            layout: true,
+                            components: false,
+                            forms: false,
+                            typography: true,
+                            basic: true,
+                        },
+                    },
+                },
+                canvas: {
+                    styles: ['//www.zingchart.com/css/zcDocs.css'],
+                    scripts: [
+                        '//cdn.zingchart.com/zingchart.min.js',
+                        '//www.zingchart.com/scripts/zcDocs.js',
+                        '//code.jquery.com/jquery-2.1.4.min.js',
+                    ],
+                },
+                script: function() {
+                    zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/'
+                    ZC.LICENSE = ['xxx', 'xxx']
+                },
+            })
+        </script>
+    </body>
+</html>
