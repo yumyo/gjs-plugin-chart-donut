@@ -56,8 +56,7 @@ export default (editor, opt = {}) => {
           
         },
         style: {
-          margin: '100px 100px 25px',
-          adding: '0'
+          padding: '0'
         },
       },
       

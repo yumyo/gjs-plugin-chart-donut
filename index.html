@@ -9,7 +9,6 @@
         />
         <script src="https://unpkg.com/grapesjs"></script>
         <script src="dist/grapesjs-chart-donut.min.js"></script>
-        <script src="https://unpkg.com/grapesjs-blocks-bootstrap4@0.1.16/dist/grapesjs-blocks-bootstrap4.min.js"></script>
         <style>
             body,
             html {
@@ -28,32 +27,9 @@
                 container: '#gjs',
                 fromElement: true,
                 allowScripts: 1,
-                plugins: ['gjs-chart-donut', 'grapesjs-blocks-bootstrap4'],
+                plugins: ['gjs-chart-donut'],
                 pluginsOpts: {
                     'gjs-chart-donut': {},
-                    'grapesjs-blocks-bootstrap4': {
-                        blocks: {
-                            form: false,
-                            button: false,
-                            button_group: false,
-                            button_toolbar: false,
-                            input: false,
-                            input_group: false,
-                            form_group_input: false,
-                            textarea: false,
-                            checkbox: false,
-                            radio: false,
-                            select: false,
-                            label: false,
-                        },
-                        blockCategories: {
-                            layout: true,
-                            components: false,
-                            forms: false,
-                            typography: true,
-                            basic: true,
-                        },
-                    },
                 },
                 canvas: {
                     styles: ['//www.zingchart.com/css/zcDocs.css'],
