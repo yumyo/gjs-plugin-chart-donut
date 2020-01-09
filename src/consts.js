@@ -7,7 +7,7 @@ export const
   green = '#63c433',
   lightGreen = '#bae559',
   darkGreen = '#00786e',
-  colorOrange = '#f7a808',
+  orange = '#f7a808',
   darkOrange = '#eb5205',
   pink = '#b71962',
   lightPink = '#e190a1',

@@ -1,11 +1,20 @@
 
 import {
-  colorOrange
+  black,
+  white,
+  navy,
+  green,
+  lightGreen,
+  darkGreen,
+  orange,
+  darkOrange,
+  pink,
+  lightPink,
+  mediumPink,
+  purple,
+  mediumPurple,
+  lightPurple
 } from './consts';
-
-console.log (colorOrange);
-
-var orange = '#ccc';
 
 export default (editor, opt = {}) => {
   const c = opt;
@@ -17,7 +26,7 @@ export default (editor, opt = {}) => {
   dc.addType(burgerType, {
     model: defaultModel.extend({
       init() {
-        this.listenTo(this, 'change:chartvalues change:chartheight', this.handleTypeChange);
+        this.listenTo(this, 'change:chartvalues change:chartheight change:chartlabels', this.handleTypeChange);
       },
       handleTypeChange() {
         const view = this.getView(); 
@@ -27,7 +36,7 @@ export default (editor, opt = {}) => {
         ...defaultModel.prototype.defaults,
         draggable: false,
         droppable: false,
-        copyable: false,
+        copyable : false,
         removable: false,
         traits: [
           // Strings are automatically converted to text types
@@ -45,25 +54,61 @@ export default (editor, opt = {}) => {
             label: 'Chart Height', 
             placeholder: 'Insert the chart height without unit (px).',
             changeProp: 1,
+          },
+          { 
+            type: 'text', 
+            name: 'chartlabels', 
+            label: 'Chart Labels', 
+            placeholder: 'Insert the chart labels separated by a comma, following the same order as the matching values.',
+            changeProp: 1,
           }
         ],  
         // Some default value
-        chartvalues: '42,13,21,15,33',
-        chartheight: '400',
-        colorOrange : orange,
+        chartvalues      : '42,13,21,15',
+        chartlabels      : 'First,Second,Third,Fourth',
+        chartheight      : '400',
+        chartBlack       : black,
+        chartWhite       : white,
+        chartNavy        : navy,
+        chartGreen       : green,
+        chartOrange      : orange,
+        chartLightGreen  : lightGreen,
+        chartDarkGreen   : darkGreen,
+        chartDarkOrange  : darkOrange,
+        chartPink        : pink,
+        chartLightPink   : lightPink,
+        chartMediumPink  : mediumPink,
+        chartPurple      : purple,
+        chartMediumPurple: mediumPurple,
+        chartLightPurple : lightPurple,
         script: function ( ) {
-          chartValuesString = '{[ chartvalues ]}';
-          let orange = '{[ colorOrange ]}';
-          var chartValuesArray = JSON.parse("[" + chartValuesString + "]");
-          chartHeightString = '{[ chartheight ]}';
-          // var chartConfig = {
-          //   'type':'bar',
-          //   'series':[
-          //       {
-          //           'values': chartValuesArray 
-          //       }
-          //     ]
-          // };
+
+          var chartValuesString = '{[ chartvalues ]}',
+              chartValuesArray = JSON.parse("[" + chartValuesString + "]"),
+              chartHeightString = '{[ chartheight ]}';
+
+          var chartLabelsString = '{[ chartlabels ]}',
+              chartLabelsArray = chartLabelsString.split(',');
+          console.log('chartLabelsString ' + chartLabelsString);
+              // var chartLabelsArray = JSON.parse("[" + chartLabelsString + "]");
+
+              // console.log(chartLabelsArray);
+
+          var chartOrange      = '{[ chartOrange ]}',
+              chartBlack       = '{[ chartBlack ]}',
+              chartWhite       = '{[ chartWhite ]}',
+              chartNavy        = '{[ chartNavy ]}',
+              chartGreen       = '{[ chartGreen ]}',
+              chartLightGreen  = '{[ chartLightGreen ]}',
+              chartDarkGreen   = '{[ chartDarkGreen ]}',
+              chartDarkOrange  = '{[ chartDarkOrange ]}',
+              chartPink        = '{[ chartPink ]}',
+              chartLightPink   = '{[ chartLightPink ]}',
+              chartMediumPink  = '{[ chartMediumPink ]}',
+              chartPurple  = '{[ chartPurple ]}',
+              chartMediumPurple  = '{[ chartMediumPurple ]}',
+              chartLightPurple = '{[ chartLightPurple ]}';
+
           var chartConfig = {
             globals: {
               alpha: 1,
@@ -87,7 +132,6 @@ export default (editor, opt = {}) => {
                     'font-size': 15,
                     placement: 'top-out',
                     fontWeight: 'normal',
-                    decimalsSeparator: ',',
                     backgroundColor: '#FFFFFF',
                     shadow: false,
                     borderWidth: 0,
@@ -108,23 +152,17 @@ export default (editor, opt = {}) => {
                 plotarea: {
                   margin: 'dynamic'
                 },
-                scale: {
-                  'size-factor': 0.5
-                },
                 scaleX: {
-                  labels: '',
                   'line-width': 0,
+                  'values': chartLabelsArray,
                   item: {
                     visible: true,
                     fontSize: 11,
                     clipText: false,
                     wrapText: true,
-                    maxWidth: 80,
                     textAlign: 'center'
                   },
-                  decimalsSeparator: ',',
                   itemsOverlap: true,
-                  maxItems: 4,
                   tick: {
                     visible: false
                   },
@@ -135,10 +173,7 @@ export default (editor, opt = {}) => {
                   }
                 },
                 scaleY: {
-                  'min-value': 0,
-                  'max-value': 17,
-                  itemsOverlap: true,
-                  step: 4,
+                  itemsOverlap: false,
                   'line-width': 0,
                   format: '%v %',
                   item: {
@@ -147,7 +182,6 @@ export default (editor, opt = {}) => {
                   tick: {
                     visible: true
                   },
-                  decimalsSeparator: ',',
                   guide: {
                     visible: true
                   },
@@ -164,20 +198,20 @@ export default (editor, opt = {}) => {
                     styles: [
                       {
                         'font-color': 'black',
-                        'background-color': orange
+                        'background-color': chartOrange
                       },
                       {
                         'font-color': 'black',
-                        'background-color': purple
+                        'background-color': chartPurple
                       },
                       {
                         'font-color': 'black',
-                        'background-color': mediumPurple
+                        'background-color': chartMediumPurple
                       },
                       {
                         'font-color': 'black',
-                        'background-color': lightPurple
-                      }
+                        'background-color': chartLightPurple
+                      },
                     ]
                   }
                 ]
