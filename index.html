@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>GrapesJS Navbar Plugin</title>
+        <title>GrapesJS Chart Plugin</title>
         <link
             href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
             rel="stylesheet"
@@ -10,6 +10,9 @@
         <script src="https://unpkg.com/grapesjs"></script>
         <script src="dist/grapesjs-chart-donut.min.js"></script>
         <script src="https://unpkg.com/grapesjs-blocks-bootstrap4@0.1.16/dist/grapesjs-blocks-bootstrap4.min.js"></script>
+        <script src="https://unpkg.com/grapesjs-blocks-flexbox@0.1.1/dist/grapesjs-blocks-flexbox.min.js"></script>
+        <script src="https://unpkg.com/grapesjs-plugin-export@1.0.7/dist/grapesjs-plugin-export.min.js"></script>
+        <script src="https://unpkg.com/grapesjs-indexeddb@0.1.1/dist/grapesjs-indexeddb.min.js"></script>
         <style>
             body,
             html {
@@ -19,7 +22,20 @@
         </style>
     </head>
     <body>
-        <div id="gjs" style="height:0px; overflow:hidden"></div>
+        <div id="gjs" style="height:0px; overflow:hidden">
+            <h1 data-gjs-type="header" draggable="true" data-highlightable="1">
+                IN page Bootstrap heading
+            </h1>
+            <div
+                data-gjs-type="default"
+                draggable="true"
+                data-highlightable="1"
+                data-gjs="zing-donut"
+                class="chart-donut"
+            >
+                <div data-gjs-type="zing-chart-donut" draggable="true"></div>
+            </div>
+        </div>
         <script type="text/javascript">
             var editor = grapesjs.init({
                 height: '100%',
@@ -28,7 +44,21 @@
                 container: '#gjs',
                 fromElement: true,
                 allowScripts: 1,
-                plugins: ['gjs-chart-donut', 'grapesjs-blocks-bootstrap4'],
+                storageManager: {
+                    type: 'indexeddb',
+                    // In case of multiple editors on the same page indicate an id to
+                    // prevent collisions
+                    id: 'gis',
+                    autosave: false,
+                    autoload: false,
+                },
+                plugins: [
+                    'gjs-chart-donut',
+                    'grapesjs-blocks-bootstrap4',
+                    'gjs-blocks-flexbox',
+                    'grapesjs-plugin-export',
+                    'grapesjs-indexeddb',
+                ],
                 pluginsOpts: {
                     'gjs-chart-donut': {},
                     'grapesjs-blocks-bootstrap4': {
@@ -54,6 +84,17 @@
                             basic: true,
                         },
                     },
+                    'gjs-blocks-flexbox': {
+                        labelRow: 'flexrow',
+                        labelColumn: 'flexcol',
+                        flexboxBlock: ['Layout'],
+                    },
+                    'grapesjs-indexeddb': {
+                        // options
+                    },
+                    'grapesjs-plugin-export': {
+                        filename: editor => 'gis-poc.zip',
+                    },
                 },
                 canvas: {
                     styles: [
@@ -70,6 +111,12 @@
                     zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/'
                     ZC.LICENSE = ['xxx', 'xxx']
                 },
+            })
+            const bm = editor.BlockManager
+            editor.on('load', () => {
+                editor.BlockManager.render([
+                    bm.get('flexbox').set('category', 'Layout'),
+                ])
             })
         </script>
     </body>

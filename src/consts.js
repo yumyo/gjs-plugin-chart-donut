@@ -1,3 +1,17 @@
 export const
   hChartDonutRef = 'h-zing-donut',
-  chartDonutRef = 'zing-donut';
+  chartDonutRef = 'zing-donut',
+  black = '#000000',
+  white = '#ffffff',
+  navy = '#002a5e',
+  green = '#63c433',
+  lightGreen = '#bae559',
+  darkGreen = '#00786e',
+  colorOrange = '#f7a808',
+  darkOrange = '#eb5205',
+  pink = '#b71962',
+  lightPink = '#e190a1',
+  mediumPink = '#CD5C6D',
+  purple = '#4F3398',
+  mediumPurple = '#7d3887',
+  lightPurple = '#a345ba';
