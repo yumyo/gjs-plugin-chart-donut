@@ -21,7 +21,7 @@ export default (editor, opt = {}) => {
   const dc = editor.DomComponents;
   const defaultType = dc.getType('default');
   const defaultModel = defaultType.model;
-  const burgerType = 'zing-chart-donut';
+  const burgerType = 'gjs-chart-pie';
 
   dc.addType(burgerType, {
     model: defaultModel.extend({
@@ -59,12 +59,12 @@ export default (editor, opt = {}) => {
             type: 'text', 
             name: 'chartlabels', 
             label: 'Chart Labels', 
-            placeholder: 'Insert the chart labels separated by a comma, following the same order as the matching values.',
+            placeholder: 'Insert the two chart labels separated by a comma, following the same order as the matching values.',
             changeProp: 1,
           }
         ],  
         // Some default value
-        chartvalues      : '42,13,21,15',
+        chartvalues      : '10.3',
         chartlabels      : 'First,Second,Third,Fourth',
         chartheight      : '400',
         chartBlack       : black,
@@ -82,14 +82,26 @@ export default (editor, opt = {}) => {
         chartMediumPurple: mediumPurple,
         chartLightPurple : lightPurple,
         script: function ( ) {
+          function typeOf(obj) {
+            return {}.toString.call(obj).split(' ')[1].slice(0, -1).toLowerCase();
+          } 
 
           var chartValuesString = '{[ chartvalues ]}',
               chartValuesArray = JSON.parse("[" + chartValuesString + "]"),
               chartHeightString = '{[ chartheight ]}';
 
+          var otherChartValuesString = 100 - chartValuesString;
+          var otherChartValuesArray = JSON.parse("[" + otherChartValuesString + "]");
+
+          console.log('chartValuesArray: ' + chartValuesArray);
+          console.log(typeOf(chartValuesArray));
+
+          console.log('otherChartValuesArray: ' + otherChartValuesArray);
+          console.log(typeOf(otherChartValuesArray));
+
           var chartLabelsString = '{[ chartlabels ]}',
               chartLabelsArray = chartLabelsString.split(',');
-          console.log('chartLabelsString ' + chartLabelsString);
+          
               // var chartLabelsArray = JSON.parse("[" + chartLabelsString + "]");
 
               // console.log(chartLabelsArray);
@@ -108,116 +120,170 @@ export default (editor, opt = {}) => {
               chartPurple  = '{[ chartPurple ]}',
               chartMediumPurple  = '{[ chartMediumPurple ]}',
               chartLightPurple = '{[ chartLightPurple ]}';
+              const chartConfig = {
+                globals: {
+                    alpha: 1,
+                    fontColor: 'black',
+                    fontWeight: 'normal'
+                },
+                gui: {
+                    'context-menu': {
+                        button: {
+                            visible: 0
+                        },
+                        gear: {}
+                    }
+                },
+                graphset: [
+                    {
+                        type: 'ring',
+                        tooltip: {
+                            visible: false
+                        },
+                        plot: {
+                            'border-width': 0,
+                            'value-box': {
+                                visible: true,
+                                placement: 'out',
+ 	                              text: '%t\n%npv%',
+                            },
+                            slice: '70%',
+                            animation: {
+                                effect: '2',
+                                method: '5',
+                                sequence: 'ANIMATION_BY_PLOT',
+                                speed: 'ANIMATION_FAST'
+                            }
+                        },
+                        'scale-r': {
+                            'ref-angle': 270
+                        },
+                        plotarea: {
+                            margin: '0% 0% 0% 0%'
+                        },
+                        series: [
 
-          var chartConfig = {
-            globals: {
-              alpha: 1,
-              fontColor: 'black',
-              fontWeight: 'normal'
-            },
-            gui: {
-              'context-menu': {
-                button: {
-                  visible: 0
-                },
-                gear: {}
-              }
-            },
-            graphset: [
-              {
-                type: 'bar',
-                plot: {
-                  'value-box': {
-                    text: '%v %',
-                    'font-size': 15,
-                    placement: 'top-out',
-                    fontWeight: 'normal',
-                    backgroundColor: '#FFFFFF',
-                    shadow: false,
-                    borderWidth: 0,
-                    padding: 3
-                    // offsetY: 5
-                  },
-                  tooltip: {
-                    visible: false
-                  },
-                  barMaxWidth: '50%',
-                  animation: {
-                    effect: '11',
-                    method: '5',
-                    sequence: 'ANIMATION_BY_NODE',
-                    speed: 1
-                  }
-                },
-                plotarea: {
-                  margin: 'dynamic'
-                },
-                scaleX: {
-                  'line-width': 0,
-                  'values': chartLabelsArray,
-                  item: {
-                    visible: true,
-                    fontSize: 11,
-                    clipText: false,
-                    wrapText: true,
-                    textAlign: 'center'
-                  },
-                  itemsOverlap: true,
-                  tick: {
-                    visible: false
-                  },
-                  guide: {
-                    visible: false,
-                    lineStyle: 'solid',
-                    lineColor: 'black'
-                  }
-                },
-                scaleY: {
-                  itemsOverlap: false,
-                  'line-width': 0,
-                  format: '%v %',
-                  item: {
-                    visible: true
-                  },
-                  tick: {
-                    visible: true
-                  },
-                  guide: {
-                    visible: true
-                  },
-                  minorGuide: {
-                    visible: false
-                  },
-                  label: {
-                    visible: false
-                  }
-                },
-                series: [
-                  {
-                    'values': chartValuesArray,
-                    styles: [
-                      {
-                        'font-color': 'black',
-                        'background-color': chartOrange
-                      },
-                      {
-                        'font-color': 'black',
-                        'background-color': chartPurple
-                      },
-                      {
-                        'font-color': 'black',
-                        'background-color': chartMediumPurple
-                      },
-                      {
-                        'font-color': 'black',
-                        'background-color': chartLightPurple
-                      },
-                    ]
-                  }
+                            {
+                                values: chartValuesArray,
+                                text: chartLabelsArray[0],
+                            },
+                            {
+                                values: otherChartValuesArray,
+                                text: chartLabelsArray[1],
+                            }
+                        ]
+                    }
                 ]
-              }
-            ]
-          };
+            };
+          // var chartConfig = {
+          //   globals: {
+          //     alpha: 1,
+          //     fontColor: 'black',
+          //     fontWeight: 'normal'
+          //   },
+          //   gui: {
+          //     'context-menu': {
+          //       button: {
+          //         visible: 0
+          //       },
+          //       gear: {}
+          //     }
+          //   },
+          //   graphset: [
+          //     {
+          //       type: 'bar',
+          //       plot: {
+          //         'value-box': {
+          //           text: '%v %',
+          //           'font-size': 15,
+          //           placement: 'top-out',
+          //           fontWeight: 'normal',
+          //           backgroundColor: '#FFFFFF',
+          //           shadow: false,
+          //           borderWidth: 0,
+          //           padding: 3
+          //           // offsetY: 5
+          //         },
+          //         tooltip: {
+          //           visible: false
+          //         },
+          //         barMaxWidth: '50%',
+          //         animation: {
+          //           effect: '11',
+          //           method: '5',
+          //           sequence: 'ANIMATION_BY_NODE',
+          //           speed: 1
+          //         }
+          //       },
+          //       plotarea: {
+          //         margin: 'dynamic'
+          //       },
+          //       scaleX: {
+          //         'line-width': 0,
+          //         'values': chartLabelsArray,
+          //         item: {
+          //           visible: true,
+          //           fontSize: 11,
+          //           clipText: false,
+          //           wrapText: true,
+          //           textAlign: 'center'
+          //         },
+          //         itemsOverlap: true,
+          //         tick: {
+          //           visible: false
+          //         },
+          //         guide: {
+          //           visible: false,
+          //           lineStyle: 'solid',
+          //           lineColor: 'black'
+          //         }
+          //       },
+          //       scaleY: {
+          //         itemsOverlap: false,
+          //         'line-width': 0,
+          //         format: '%v %',
+          //         item: {
+          //           visible: true
+          //         },
+          //         tick: {
+          //           visible: true
+          //         },
+          //         guide: {
+          //           visible: true
+          //         },
+          //         minorGuide: {
+          //           visible: false
+          //         },
+          //         label: {
+          //           visible: false
+          //         }
+          //       },
+          //       series: [
+          //         {
+          //           'values': chartValuesArray,
+          //           styles: [
+          //             {
+          //               'font-color': 'black',
+          //               'background-color': chartOrange
+          //             },
+          //             {
+          //               'font-color': 'black',
+          //               'background-color': chartPurple
+          //             },
+          //             {
+          //               'font-color': 'black',
+          //               'background-color': chartMediumPurple
+          //             },
+          //             {
+          //               'font-color': 'black',
+          //               'background-color': chartLightPurple
+          //             },
+          //           ]
+          //         }
+          //       ]
+          //     }
+          //   ]
+          // };
           // Get the element ID
           const el = this;
           const ID = el.id;

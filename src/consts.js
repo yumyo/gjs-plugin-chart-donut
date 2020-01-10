@@ -1,6 +1,6 @@
 export const
-  hChartDonutRef = 'h-zing-donut',
-  chartDonutRef = 'zing-donut',
+  hChartRef = 'h-chart-pie',
+  chartRef = 'chart-pie',
   black = '#000000',
   white = '#ffffff',
   navy = '#002a5e',

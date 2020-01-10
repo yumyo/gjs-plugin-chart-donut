@@ -8,7 +8,7 @@
             rel="stylesheet"
         />
         <script src="https://unpkg.com/grapesjs"></script>
-        <script src="dist/grapesjs-chart-donut.min.js"></script>
+        <script src="dist/grapesjs-chart-pie.min.js"></script>
         <script src="https://unpkg.com/grapesjs-blocks-bootstrap4@0.1.16/dist/grapesjs-blocks-bootstrap4.min.js"></script>
         <script src="https://unpkg.com/grapesjs-blocks-flexbox@0.1.1/dist/grapesjs-blocks-flexbox.min.js"></script>
         <script src="https://unpkg.com/grapesjs-plugin-export@1.0.7/dist/grapesjs-plugin-export.min.js"></script>
@@ -22,20 +22,7 @@
         </style>
     </head>
     <body>
-        <div id="gjs" style="height:0px; overflow:hidden">
-            <h1 data-gjs-type="header" draggable="true" data-highlightable="1">
-                IN page Bootstrap heading
-            </h1>
-            <div
-                data-gjs-type="default"
-                draggable="true"
-                data-highlightable="1"
-                data-gjs="zing-donut"
-                class="chart-donut"
-            >
-                <div data-gjs-type="zing-chart-donut" draggable="true"></div>
-            </div>
-        </div>
+        <div id="gjs" style="height:0px; overflow:hidden"></div>
         <script type="text/javascript">
             var editor = grapesjs.init({
                 height: '100%',
@@ -53,14 +40,14 @@
                     autoload: false,
                 },
                 plugins: [
-                    'gjs-chart-donut',
+                    'gjs-chart-pie',
                     'grapesjs-blocks-bootstrap4',
                     'gjs-blocks-flexbox',
                     'grapesjs-plugin-export',
                     'grapesjs-indexeddb',
                 ],
                 pluginsOpts: {
-                    'gjs-chart-donut': {},
+                    'gjs-chart-pie': {},
                     'grapesjs-blocks-bootstrap4': {
                         blocks: {
                             form: false,
