@@ -5,15 +5,15 @@ import {
   hChartRef
 } from './consts';
 
-export default grapesjs.plugins.add('gjs-chart-pie', (editor, opts = {}) => {
+export default grapesjs.plugins.add('gjs-chart-donut', (editor, opts = {}) => {
   let c = opts;
 
   let defaults = {
     blocks: [hChartRef],
     defaultStyle: 1,
-    chartClsPfx: 'chart-pie',
-    labelChart: 'Pie Chart Single',
-    labelChartBlock: 'Chart Pie Single',
+    chartClsPfx: 'chart-donut',
+    labelChart: 'Donut Chart Single',
+    labelChartBlock: 'Donut Single',
     labelChartCategory: 'Charts',
   };
 
