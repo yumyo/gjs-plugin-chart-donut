@@ -6,7 +6,7 @@ import {
 export default (editor, opt = {}) => {
   const c = opt;
   const bm = editor.BlockManager;
-  const chartClsPfx = c.chartClsPfx || 'chart-pie';
+  const chartClsPfx = c.chartClsPfx || 'chart-donut';
 
   if (c.blocks.indexOf(hChartRef) >= 0) {
     bm.add(hChartRef, {
@@ -19,7 +19,7 @@ export default (editor, opt = {}) => {
 
             <div data-gjs-droppable="false" data-gjs-draggable="false"
             data-gjs-removable="false" data-gjs-copyable="false" data-gjs-highlightable="false"
-            data-gjs-type="gjs-chart-pie">
+            data-gjs-type="gjs-chart-donut">
               <div class="chart"></div>
             </div>
 

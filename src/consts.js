@@ -1,6 +1,6 @@
 export const
-  hChartRef = 'h-chart-pie',
-  chartRef = 'chart-pie',
+  hChartRef = 'h-chart-donut',
+  chartRef = 'chart-donut',
   black = '#000000',
   white = '#ffffff',
   navy = '#002a5e',
