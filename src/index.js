@@ -12,8 +12,8 @@ export default grapesjs.plugins.add('gjs-chart-donut', (editor, opts = {}) => {
     blocks: [hChartRef],
     defaultStyle: 1,
     chartClsPfx: 'chart-donut',
-    labelChart: 'Donut Chart Single',
-    labelChartBlock: 'Donut Single',
+    labelChart: 'Donut Two Values',
+    labelChartBlock: 'Donut Two Values',
     labelChartCategory: 'Charts',
   };
 
