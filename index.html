@@ -8,7 +8,7 @@
             rel="stylesheet"
         />
         <script src="https://unpkg.com/grapesjs"></script>
-        <script src="dist/grapesjs-chart-donut.min.js"></script>
+        <script src="dist/gjs-chart-donut.min.js"></script>
         <script src="https://unpkg.com/grapesjs-blocks-bootstrap4@0.1.16/dist/grapesjs-blocks-bootstrap4.min.js"></script>
         <script src="https://unpkg.com/grapesjs-blocks-flexbox@0.1.1/dist/grapesjs-blocks-flexbox.min.js"></script>
         <script src="https://unpkg.com/grapesjs-plugin-export@1.0.7/dist/grapesjs-plugin-export.min.js"></script>
@@ -33,6 +33,7 @@
                 allowScripts: 1,
                 storageManager: {
                     type: 'indexeddb',
+                    contentTypeJson: false,
                     // In case of multiple editors on the same page indicate an id to
                     // prevent collisions
                     id: 'gis',

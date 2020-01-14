@@ -1,8 +1,8 @@
 {
-    "name": "grapesjs-chart-donut",
-    "version": "0.1.4",
+    "name": "gjs-chart-donut",
+    "version": "0.1.16",
     "description": "Chart component for the GrapesJS editor",
-    "main": "dist/grapesjs-chart-donut.min.js",
+    "main": "dist/gjs-chart-donut.min.js",
     "scripts": {
         "lint": "eslint src",
         "build": "npm run v:patch && webpack --env.production",

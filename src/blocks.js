@@ -19,7 +19,7 @@ export default (editor, opt = {}) => {
 
             <div data-gjs-droppable="false" data-gjs-draggable="false"
             data-gjs-removable="false" data-gjs-copyable="false" data-gjs-highlightable="false"
-            data-gjs-type="gjs-chart-donut">
+            data-gjs-type="${chartClsPfx}">
               <div class="chart"></div>
             </div>
 

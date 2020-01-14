@@ -21,9 +21,9 @@ export default (editor, opt = {}) => {
   const dc = editor.DomComponents;
   const defaultType = dc.getType('default');
   const defaultModel = defaultType.model;
-  const burgerType = 'gjs-chart-donut';
+  const blockType = 'chart-donut';
 
-  dc.addType(burgerType, {
+  dc.addType(blockType, {
     model: defaultModel.extend({
       init() {
         this.listenTo(this, 'change:chartvalues change:chartheight change:chartlabels', this.handleTypeChange);
@@ -64,7 +64,8 @@ export default (editor, opt = {}) => {
           }
         ],  
         // Some default value
-        chartvalues      : '10.3',
+        chartvalues      : '10.3, 89.7',
+        otherchartvalues : '89.7',
         chartlabels      : 'First,Second,Third,Fourth',
         chartheight      : '400',
         chartBlack       : black,
@@ -87,24 +88,24 @@ export default (editor, opt = {}) => {
           } 
 
           var chartValuesString = '{[ chartvalues ]}',
-              chartValuesArray = JSON.parse("[" + chartValuesString + "]"),
-              chartHeightString = '{[ chartheight ]}';
-
-          var otherChartValuesString = 100 - chartValuesString;
-          var otherChartValuesArray = JSON.parse("[" + otherChartValuesString + "]");
-
-          console.log('chartValuesArray: ' + chartValuesArray);
-          console.log(typeOf(chartValuesArray));
-
-          console.log('otherChartValuesArray: ' + otherChartValuesArray);
-          console.log(typeOf(otherChartValuesArray));
+              otherChartValuesString = '{[ otherchartvalues ]}';
 
           var chartLabelsString = '{[ chartlabels ]}',
               chartLabelsArray = chartLabelsString.split(',');
           
-              // var chartLabelsArray = JSON.parse("[" + chartLabelsString + "]");
+          var chartValuesArray = JSON.parse("[" + chartValuesString + "]"),
+              otherChartValuesArray = JSON.parse("[" + otherChartValuesString + "]"),
+              chartHeightString = '{[ chartheight ]}';
+          
+          var valuesArray = []; 
 
-              // console.log(chartLabelsArray);
+          if (chartValuesArray) {
+            for (let i = 0; i < chartValuesArray.length; i++) {
+
+              valuesArray.push( {values: JSON.parse("[" + chartValuesArray[i] + "]"), text: chartLabelsArray[i] }) ;
+              
+              }
+          }
 
           var chartOrange      = '{[ chartOrange ]}',
               chartBlack       = '{[ chartBlack ]}',
@@ -161,17 +162,8 @@ export default (editor, opt = {}) => {
                         plotarea: {
                             margin: '0% 0% 0% 0%'
                         },
-                        series: [
-
-                            {
-                                values: chartValuesArray,
-                                text: chartLabelsArray[0],
-                            },
-                            {
-                                values: otherChartValuesArray,
-                                text: chartLabelsArray[1],
-                            }
-                        ]
+                        series: valuesArray
+                        
                     }
                 ]
             };
@@ -179,7 +171,6 @@ export default (editor, opt = {}) => {
           // Get the element ID
           const el = this;
           const ID = el.id;
-          console.log(chartHeightString);
           zingchart.render({ 
             id : ID, 
             data : chartConfig, 
@@ -196,8 +187,8 @@ export default (editor, opt = {}) => {
     }, {
       isComponent(el) {
         if(el.getAttribute &&
-          el.getAttribute('data-gjs-type') == burgerType) {
-          return {type: burgerType};
+          el.getAttribute('data-gjs-type') == blockType) {
+          return {type: blockType};
         }
       },
     }),
