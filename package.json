@@ -1,6 +1,6 @@
 {
     "name": "gjs-chart-donut",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "description": "Chart component for the GrapesJS editor",
     "main": "dist/gjs-chart-donut.min.js",
     "scripts": {
